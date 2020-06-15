@@ -1,3 +1,8 @@
-<li>
-  <%= link_to movie.name, movie_path(movie)%>
-</li>
+<div class='col-6'>
+  <%= link_to movie_path(movie) do %>
+  <%= image_tag(movie.image, width: 200, height: 200) if movie.image.attached? %><br>
+  <b>
+    <%= movie.name %>
+  </b>
+  <%end%>
+</div>

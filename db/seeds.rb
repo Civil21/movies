@@ -8,11 +8,25 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Movie.create([
-               {
-                 name: 'Аватар'
-               },
-               {
-                 name: 'Аватар 2'
-               }
-             ])
+[
+  {
+    name: 'Аватар',
+    year: 2012
+
+  },
+  {
+    name: 'Аватар 2',
+    year: 2020,
+    desc: 'Продовження Аватара'
+  }
+].each do |movie_params|
+  movie = Movie.create(movie_params)
+  next unless movie.save
+
+  begin
+    file = URI.parse('https://picsum.photos/900').open
+    movie.image.attach(io: file, filename: movie.name.to_s, content_type: 'pictures.jpg')
+  rescue OpenURI::HTTPError => e
+    pp e
+  end
+end
