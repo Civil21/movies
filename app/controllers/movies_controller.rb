@@ -8,4 +8,8 @@ class MoviesController < ApplicationController
   def show
     @movie = Movie.find(params[:id])
   end
+
+  def search
+    @movies = Movie.where('LOWER(name) LIKE ?', "%#{params[:q].downcase}%")
+  end
 end

@@ -1,1 +1,7 @@
-<%= link_to "Movies", root_path %>
+<nav class="navbar navbar-light bg-light">
+  <%= link_to "Movies", root_path, class:"navbar-brand" %>
+  <%= form_tag search_path,class:"form-inline", method: :get  do%>
+  <%= text_field_tag :q,params[:q],class:"form-control mr-sm-2"%>
+  <%= button_tag "Search",class:"btn btn-outline-success my-2 my-sm-0" %>
+<%end%>
+</nav>

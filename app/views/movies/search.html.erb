@@ -1,0 +1,7 @@
+<% if @movies.any?%>
+<div class="row">
+  <%=render @movies %>
+</div>
+<%else%>
+<h2>Не знайдено результатів</h2>
+<%end%>

@@ -5,5 +5,5 @@ Rails.application.routes.draw do
   root to: 'movies#index'
   resources :movies, only: %w[show index]
 
-  get 'movies/:id', to: 'movies#show'
+  get :search, to: 'movies#search'
 end
