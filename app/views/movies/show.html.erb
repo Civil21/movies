@@ -11,3 +11,8 @@
 <p>
 <%= @movie.desc%>
 </p>
+<hr>
+<h3>comments</h3>
+<%= render 'comments/form'%>
+
+<%= render @movie.comments%>

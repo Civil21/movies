@@ -10,4 +10,6 @@ Rails.application.routes.draw do
   resources :categories, only: %w[show index]
 
   get :search, to: 'movies#search'
+
+  resources :comments, only: [:create]
 end
