@@ -11,6 +11,9 @@
 <p>
 <%= @movie.desc%>
 </p>
+<div class="row">
+<%=render @movie.players%>
+</div>
 <hr>
 <h3>comments</h3>
 <%= render 'comments/form'%>

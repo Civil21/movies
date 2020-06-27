@@ -7,6 +7,10 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
+import "@fortawesome/fontawesome-free/js/all";
 
 import "bootstrap"
 import "../stylesheets/application";
+
+import {select_sort} from "./custom"
+window.select_sort = select_sort

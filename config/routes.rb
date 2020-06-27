@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   root to: 'movies#index'
   resources :movies, only: %w[show index]
   resources :categories, only: %w[show index]
+  resources :players, only: [:show]
 
   get :search, to: 'movies#search'
 

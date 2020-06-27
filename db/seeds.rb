@@ -8,36 +8,25 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-[
-  { name: 'Мелодрама' },
-  { name: 'Детектив' },
-  { name: 'Драма' },
-  { name: 'ІНШЕ' }
-].each do |category|
-  Category.find_or_create_by!(name: category[:name])
+10.times do
+  Category.find_or_create_by!(name: Faker::Book.genre)
+end
+5.times do
+  Player.find_or_create_by!(name: Faker::Name.name)
 end
 
-[
-  {
-    name: 'Аватар',
-    year: 2012
-
-  },
-  {
-    name: 'Аватар 2',
-    year: 2020,
-    desc: 'Продовження Аватара'
-  },
-  {
-    name: 'Ганібал',
-    year: 2014
-  }
-].each do |movie_params|
-  movie = Movie.create(movie_params)
+10.times do
+  movie = Movie.create(
+    name: Faker::Movie.title,
+    year: rand(1990...2020)
+  )
   next unless movie.save
 
   2.times do
     movie.categories << Category.find(rand(1...Category.count))
+  end
+  2.times do
+    movie.players << Player.find(rand(1...Player.count))
   end
   begin
     file = URI.parse('https://picsum.photos/900').open
@@ -46,4 +35,6 @@ end
     pp e
   end
 end
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+if Rails.env.development?
+  AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
+end

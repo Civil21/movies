@@ -5,7 +5,14 @@ class Movie < ApplicationRecord
   has_many_attached :images
 
   has_many :movie_categories
-  has_many :categories, through: :movie_categories
+  has_many :categories, -> { distinct }, through: :movie_categories
+
+  has_many :movie_players
+  has_many :players, -> { distinct }, through: :movie_players
 
   has_many :comments
+
+  def sname
+    name.downcase
+  end
 end

@@ -1,8 +1,27 @@
-<div class='col-6'>
-  <%= link_to movie_path(movie) do %>
-  <%= image_tag(movie.image, width: 200, height: 200) if movie.image.attached? %><br>
-  <b>
-    <%= movie.name %>
-  </b>
-  <%end%>
+<div class='col-12 m-2'>
+  <div class="row">
+    <div class="col-12 col-md-4">
+      <%= link_to movie_path(movie) do %>
+      <%= image_tag(movie.image, width: 200, height: 200) if movie.image.attached? %><br>
+    <%end%>
+  </div>
+  <div class="col-12 col-md-8">
+    <b>
+      <%=link_to movie.name, movie_path(movie)%>
+    </b>
+    <p>
+      Year:
+      <%=movie.year%>
+    </p>
+    <p>
+      <%= movie.desc%>
+    </p>
+    <div class="">
+      <% movie.categories.each do |category|%>
+        <%=link_to category_path(category.name) do %>
+        <span class="badge badge-primary"><%=category.name%></span><%end%>
+    <%end%>
+  </div>
+</div>
+</div>
 </div>
