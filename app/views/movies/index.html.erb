@@ -1,5 +1,5 @@
 <div class="">
-  <%= select_tag :sort,options_for_select([1,2,3],1),onchange:"select_sort(this)"%>
+  <%= select_tag :sort,options_for_select(["НЕщодавно додані","Новіші","Cтаріші"],"НЕщодавно додані"),onchange:"select_sort(this)"%>
 </div>
 <div class="row" id="movies">
   <%=render @movies %>
