@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class MoviesController < ApplicationController
+  before_action :authenticate_user!, only: [:favorite]
+  before_action :movie, only: [:show]
+
   def index
     @movies = case params[:sort].to_s
               when 'НЕщодавно додані'
@@ -21,11 +24,24 @@ class MoviesController < ApplicationController
     end
   end
 
-  def show
-    @movie = Movie.find(params[:id])
-  end
+  def show; end
 
   def search
     @movies = Movie.where('lower(name) like ?', "%#{params[:q].downcase}%")
+  end
+
+  def favorite
+    if select = current_user.favorites.find_by(movie_id: movie.id)
+      select.delete
+    else
+      current_user.movies << movie
+    end
+    redirect_back(fallback_location: root_path)
+  end
+
+  private
+
+  def movie
+    @movie ||= Movie.find(params[:id])
   end
 end
