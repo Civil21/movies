@@ -15,19 +15,15 @@ end
   Player.find_or_create_by!(name: Faker::Name.name)
 end
 
-10.times do
+20.times do
   movie = Movie.create(
     name: Faker::Movie.title,
     year: rand(1990...2020)
   )
   next unless movie.save
 
-  2.times do
-    movie.categories << Category.find(rand(1...Category.count))
-  end
-  2.times do
-    movie.players << Player.find(rand(1...Player.count))
-  end
+  movie.categories << Category.where(id: (0..3).map { Category.all.sample }.uniq)
+  movie.players << Player.where(id: (0..2).map { Player.all.sample.id }.uniq)
   begin
     file = URI.parse('https://picsum.photos/900').open
     movie.image.attach(io: file, filename: movie.name.to_s, content_type: 'pictures.jpg')

@@ -14,7 +14,7 @@ class MoviesController < ApplicationController
                 Movie.order(:year)
               else
                 Movie.order(:created_at)
-              end
+              end.includes(:categories, :favorites).with_attached_image
     string = @movies.map do |movie|
       render_to_string(partial: 'movies/movie', locals: { movie: movie })
     end.join
@@ -32,7 +32,7 @@ class MoviesController < ApplicationController
 
   def favorite
     if select = current_user.favorites.find_by(movie_id: movie.id)
-      select.delete
+      select.destroy
     else
       current_user.movies << movie
     end

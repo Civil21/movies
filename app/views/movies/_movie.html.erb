@@ -7,9 +7,9 @@
   </div>
   <div class="col-12 col-md-8">
     <b>
-      <%=link_to movie.name, movie_path(movie)%> | 
+      <%=link_to movie.name, movie_path(movie)%> |
       <span>
-        <%= link_to  (user_signed_in? && current_user.favorites.find_by(movie_id: movie.id))? "remove from f" : "add to f", favorite_movie_path(movie), method: :post %>
+        <%= link_to  (user_signed_in? && movie.favorites.where(user_id: current_user.id))? "remove from f" : "add to f", favorite_movie_path(movie), method: :post %>
       </span>
     </b>
     <p>
