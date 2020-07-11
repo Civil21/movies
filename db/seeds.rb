@@ -18,7 +18,8 @@ end
 20.times do
   movie = Movie.create(
     name: Faker::Movie.title,
-    year: rand(1990...2020)
+    year: rand(1990...2020),
+    rate: rand(1...5)
   )
   next unless movie.save
 

@@ -8,4 +8,5 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :movies, -> { distinct }, through: :favorites
   has_many :comments, dependent: :destroy
+  has_many :reviews, dependent: :destroy
 end

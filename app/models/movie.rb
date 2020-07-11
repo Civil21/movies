@@ -15,6 +15,13 @@ class Movie < ApplicationRecord
 
   has_many :comments, dependent: :destroy
 
+  has_many :reviews, dependent: :destroy
+
+  def check_rate
+    pp reviews.average(:rate)
+    update(rate: reviews.average(:rate))
+  end
+
   def sname
     name.downcase
   end

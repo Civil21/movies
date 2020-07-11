@@ -21,4 +21,5 @@ Rails.application.routes.draw do
   resources :comments, only: [:create]
 
   resource :profile, controller: :profile, only: [:show]
+  resources :reviews, only: [:create]
 end

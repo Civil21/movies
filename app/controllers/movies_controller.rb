@@ -24,7 +24,9 @@ class MoviesController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @movie = Movie.includes(:categories, :comments, :favorites, :reviews, players: :image_attachment).find(params[:id])
+  end
 
   def search
     @movies = Movie.where('lower(name) like ?', "%#{params[:q].downcase}%")

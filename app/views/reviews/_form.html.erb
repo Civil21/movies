@@ -1,0 +1,10 @@
+<%= simple_form_for :review, url: reviews_path do |f|%>
+<%=f.input :rate,as: :hidden%>
+Rate
+<div id="raty">
+
+</div>
+<%=f.input :desc, as: :text%>
+<%=f.input :movie_id,as: :hidden, input_html: {value: @movie.id}%>
+ <%=f.submit%>
+<%end%>

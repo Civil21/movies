@@ -1,55 +1,38 @@
 # frozen_string_literal: true
 
-ActiveAdmin.register Movie do
+ActiveAdmin.register Player do
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :name, :year, :desc, :rat, :image
-
+  permit_params :name, :age, :bio
   #
   # or
   #
   # permit_params do
-  #   permitted = [:name, :year, :desc, :rat]
+  #   permitted = [:name, :age, :bio]
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
 
-  filter :name
-  filter :year
-  filter :rate
   show do
     attributes_table do
       row :name
       row 'image' do |ad|
         image_tag(ad.image, width: 200, height: 200) if ad.image.attached?
       end
-      row :rate
-      row :year
-      row :desc
+      row :age
+      row :bio
     end
 
-    panel 'Відгуки' do
-      table_for movie.reviews do
+    panel 'Фільми в яких знімався' do
+      table_for player.movies do
         column :id
-        column :user
+        column :name
+        column :year
         column :rate
-        column :desc
       end
     end
-  end
-
-  form do |f|
-    f.inputs do
-      f.input :name
-      f.input :year
-      f.input :rat
-      f.input :desc, as: :text
-      f.input :image, as: :file
-    end
-
-    f.actions
   end
 end

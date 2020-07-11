@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_04_081351) do
+ActiveRecord::Schema.define(version: 2020_07_11_072101) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(version: 2020_07_04_081351) do
     t.float "rat"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.float "rate"
     t.index ["created_at"], name: "index_movies_on_created_at"
     t.index ["year"], name: "index_movies_on_year"
   end
@@ -110,6 +111,15 @@ ActiveRecord::Schema.define(version: 2020_07_04_081351) do
     t.string "name"
     t.integer "age"
     t.string "bio"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "movie_id"
+    t.float "rate"
+    t.string "desc"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

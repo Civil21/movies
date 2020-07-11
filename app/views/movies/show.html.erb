@@ -1,21 +1,53 @@
-<h2>
-<%= @movie.name%>
-</h2>
-<%= image_tag(@movie.image, width: 200, height: 200) if @movie.image.attached? %>
-<span>рік:
-<%= @movie.year%>
-</span>
-<span>
-<%=render @movie.categories%>
-</span>
-<p>
-<%= @movie.desc%>
-</p>
 <div class="row">
-<%=render @movie.players%>
-</div>
-<hr>
-<h3>comments</h3>
-<%= render 'comments/form'%>
+  <div class="col-12">
 
-<%= render @movie.comments%>
+
+    <h2>
+      <%= @movie.name%>
+    </h2>
+  </div>
+    <div class="col-12 col-md-4">
+    <%= image_tag(@movie.image, width: 200, height: 200) if @movie.image.attached? %>
+  </div>
+  <div class="col-12 col-md-8">
+    <p>
+      <div class="raty" data-score="<%=@movie.rate.to_f%>">
+
+      </div>
+    </p>
+    <span>рік:
+      <%= @movie.year%>
+    </span>
+    <p>
+      <%=render @movie.categories%>
+    </p>
+    <p>
+      <%= @movie.desc%>
+    </p>
+  </div>
+  <div class="col-12">
+    <h3>
+      Відгуки:
+    </h3>
+    <div class="row">
+      <%=render @movie.reviews%>
+    </div>
+    <%unless @movie.reviews.where(user_id: current_user.id).any?%>
+    <%= render "reviews/form"%>
+    <%end%>
+  </div>
+  <div class="col-12">
+
+    <div class="row">
+      <%=render @movie.players%>
+    </div>
+  </div>
+  <div class="col-12">
+
+  <hr>
+  <h3>comments</h3>
+  <%= render 'comments/form'%>
+
+  <%= render @movie.comments%>
+</div>
+</div>
